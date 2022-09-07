@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String _tt = 'hello';
   late int _index;
+  bool  _isChecked = false ;
 // counter 변수를 1 증가시키고 화면을 다시 그리는 메서드
   void _incrementCounter() {
     setState(() {
@@ -65,89 +66,122 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  int _selectedIndex = 0;
+ @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Test Application'),
+      ),
+      body: Align(
+        alignment: Alignment.center,
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Checkbox(
+                value: _isChecked,
+                onChanged: (value) {
+                  setState(() {
+                    _isChecked = value;
+                  });
+                }
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Switch(
+                value: _isChecked,
+                onChanged: (value) {
+                  setState(() {
+                    _isChecked = value;
+                  });
+                },
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+출처: https://icodebroker.tistory.com/10039 [ICODEBROKER:티스토리]
 
-  final List<Widget> _widgetOptions = <Widget>[
+  // int _selectedIndex = 0;
 
-    Center(
-      child: Card(
-        elevation: 4.0,
-        child: Image(
-          image: AssetImage('assets/dotetimer.webp'),
-        ),
-      ),
-    ),
-    Column(
-      children: const [
-        CircularProgressIndicator(),
-        TextField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: '여기에 입력하소서'
-      ),
-    ),
-      ],
-    ),
-    Switch(
-      value: isChecked,
-      onChanged: (value){
-        setState(() {
-          isChecked = value;
-        });
-      }
-      ),
-    Text(
-      'Index 2: School',
-    ),
-  ];
+  // final List<Widget> _widgetOptions = <Widget>[
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  //   Center(
+  //     child: Card(
+  //       elevation: 4.0,
+  //       child: Image(
+  //         image: AssetImage('assets/dotetimer.webp'),
+  //       ),
+  //     ),
+  //   ),
+  //   Column(
+  //     children: const [
+  //       CircularProgressIndicator(),
+  //       TextField(
+  //     decoration: InputDecoration(
+  //       border: OutlineInputBorder(),
+  //       labelText: '여기에 입력하소서'
+  //     ),
+  //   ),
+  //     ],
+  //   ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        // 아랫줄을 쓰지 않아도 탭이 4개 미만인 경우 기본으로 설정된다.
-        type: BottomNavigationBarType.fixed,
+  //   Text(
+  //     'Index 2: School',
+  //   ),
+  // ];
 
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
-      ),
-    );
-  }
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: const Text('BottomNavigationBar Sample'),
+  //     ),
+  //     body: Center(
+  //       child: _widgetOptions.elementAt(_selectedIndex),
+  //     ),
+  //     bottomNavigationBar: BottomNavigationBar(
+  //       showSelectedLabels: false,
+  //       showUnselectedLabels: false,
+  //       items: const <BottomNavigationBarItem>[
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home),
+  //           label: 'Home',
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.business),
+  //           label: 'Business',
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.school),
+  //           label: 'School',
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.school),
+  //           label: 'School',
+  //         ),
+  //       ],
+  //       currentIndex: _selectedIndex,
+  //       onTap: _onItemTapped,
+  //       // 아랫줄을 쓰지 않아도 탭이 4개 미만인 경우 기본으로 설정된다.
+  //       type: BottomNavigationBarType.fixed,
+
+  //       selectedItemColor: Colors.black,
+  //       unselectedItemColor: Colors.grey,
+  //       backgroundColor: Colors.white,
+  //     ),
+  //   );
+  // }
   // @override
   // Widget build(BuildContext context) {
   //   return Scaffold(
