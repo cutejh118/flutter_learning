@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_0907/first_page.dart';
+import 'package:flutter_0907/second.dart';
+import 'package:flutter_0907/peson.dart';
 // ignore_for_file: prefer_const_constructors
 
 // 앱 시작 부분
@@ -177,21 +180,35 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      appBar: AppBar(
-        title: Text('Flutter Dialog'),
+      title: ('Demo'),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: Column(
-        children: <Widget>[
-          // RaisedButton, Text 두개이상이니 children
-          ElevatedButton(
-            onPressed: () {flutterDatePicker();},
-            child: Text('Date Picker'),
-          ),
-          Text('$_selectedTime'),
-        ],
-      ),
+      home: FirstPage(),
+      routes: {
+        '/first': (context) =>  FirstPage(),
+        '/second': (context) =>  SecondPage(),
+      },
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text('Flutter Dialog'),
+  //     ),
+  //     body: Column(
+  //       children: <Widget>[
+  //         // RaisedButton, Text 두개이상이니 children
+  //         ElevatedButton(
+  //           onPressed: () {flutterDatePicker();},
+  //           child: Text('Date Picker'),
+  //         ),
+  //         Text('$_selectedTime'),
+  //       ],
+  //     ),
+  //   );
+  // }
   // Column(
   //     children: <Widget>[
   //       ListTile(
