@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors
 
-
 // 앱 시작 부분
 void main() {
   runApp(const MyApp());
@@ -33,13 +32,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+enum Gender { MAN, WOMEN }
+
 // 위 MYHomePAge 클래스의 상태를 나타내는 State 클래스
 class _MyHomePageState extends State<MyHomePage> {
   late TabController _controller;
   int _counter = 0;
   String _tt = 'hello';
   late int _index;
-  bool  _isChecked = false ;
+  var _isChecked = false;
+
 // counter 변수를 1 증가시키고 화면을 다시 그리는 메서드
   void _incrementCounter() {
     setState(() {
@@ -66,46 +68,162 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
- @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Test Application'),
-      ),
-      body: Align(
-        alignment: Alignment.center,
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Checkbox(
-                value: _isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    _isChecked = value;
-                  });
-                }
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Switch(
-                value: _isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    _isChecked = value;
-                  });
-                },
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-출처: https://icodebroker.tistory.com/10039 [ICODEBROKER:티스토리]
+  DateTime? _selectedTime;
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text('ㅎㅎ'),
+  //     ),
+  //     body: Text(
+  //       'gㅇ',
+  //     ),
+  //   );
+  // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text('test'),
+  //     ),
+  //     body: Align(
+  //       alignment: Alignment.center,
+  //       child: Padding(
+  //         padding: EdgeInsets.all(10.0),
+  //         child: Column(
+  //           children: <Widget>[
+  //             Checkbox(
+  //               value: _isChecked,
+  //               onChanged: (value) {
+  //                 setState(() {
+  //                   _isChecked = value!;
+  //                 });
+  //               } )
+  //           ],
+  //         ),
+  //         ),
+  //     ),
+  //   );
+  // }
+
+
+  void flutterDialog() {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: const <Widget>[
+                Text("Dialog Title"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                Text(
+                  "Dialog Content",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("확인"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: Text("취소"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void flutterDatePicker() {
+    Future<DateTime?> selectedDate = showDatePicker(
+      context: context,
+      initialDate: DateTime.now(), // 초깃값
+      firstDate: DateTime(2018), // 시작일
+      lastDate: DateTime(2030), // 마지막일
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.dark(), // 다크테마
+          child: child!,
+        );
+      },
+    );
+    selectedDate.then((dateTime) {
+      setState(() {
+        _selectedTime = dateTime;
+      });
+    });
+  }
+
+  // Gender _gender = Gender.MAN;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      appBar: AppBar(
+        title: Text('Flutter Dialog'),
+      ),
+      body: Column(
+        children: <Widget>[
+          // RaisedButton, Text 두개이상이니 children
+          ElevatedButton(
+            onPressed: () {flutterDatePicker();},
+            child: Text('Date Picker'),
+          ),
+          Text('$_selectedTime'),
+        ],
+      ),
+    );
+  }
+  // Column(
+  //     children: <Widget>[
+  //       ListTile(
+  //         title: Text('남자'),
+  //     leading: Radio(
+  //     value : Gender.MAN,
+  //     groupValue: _gender,
+  //     onChanged: (Gender? value){
+  //       setState(() {
+  //         _gender = value!;
+  //       });
+  //     },
+
+  //   ),
+  // ),
+  // ListTile(
+  //   title: Text('여자'),
+  //     leading: Radio(
+  //     value : Gender.WOMEN,
+  //     groupValue: _gender,
+  //     onChanged: (Gender? value){
+  //       setState(() {
+  //         _gender = value!;
+  //       });
+  //     },
+
+  //   ),
+  // ),
+  // ]
+  // )
+  // );
+  // }
   // int _selectedIndex = 0;
 
   // final List<Widget> _widgetOptions = <Widget>[
@@ -129,7 +247,6 @@ class _MyHomePageState extends State<MyHomePage> {
   //   ),
   //     ],
   //   ),
-
   //   Text(
   //     'Index 2: School',
   //   ),
@@ -173,7 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //       ],
   //       currentIndex: _selectedIndex,
   //       onTap: _onItemTapped,
-  //       // 아랫줄을 쓰지 않아도 탭이 4개 미만인 경우 기본으로 설정된다.
+  // //       // 아랫줄을 쓰지 않아도 탭이 4개 미만인 경우 기본으로 설정된다.
   //       type: BottomNavigationBarType.fixed,
 
   //       selectedItemColor: Colors.black,
