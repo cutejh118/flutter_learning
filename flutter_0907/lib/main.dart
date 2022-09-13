@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_0907/first_page.dart';
 import 'package:flutter_0907/second.dart';
-import 'package:flutter_0907/peson.dart';
+import 'package:flutter_0907/person.dart';
 // ignore_for_file: prefer_const_constructors
 
 // 앱 시작 부분
@@ -185,10 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
         primarySwatch: Colors.blue,
       ),
       home: FirstPage(),
-      routes: {
-        '/first': (context) =>  FirstPage(),
-        '/second': (context) =>  SecondPage(),
-      },
     );
   }
   // @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_0907/second.dart';
-import 'package:flutter_0907/peson.dart';
+import 'package:flutter_0907/person.dart';
 
 class FirstPage extends StatelessWidget{
   const FirstPage({Key? key}) : super(key: key);

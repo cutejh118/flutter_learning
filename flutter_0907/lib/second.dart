@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_0907/peson.dart';
+import 'package:flutter_0907/person.dart';
 import 'package:flutter_0907/first_page.dart';
 
 class SecondPage extends StatelessWidget{
